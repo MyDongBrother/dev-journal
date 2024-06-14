@@ -14,12 +14,6 @@
  * </table>
  */
 
-int sum(int *a, int n)
-{
-    int i, s = 0;
-    for (i = 0; i < n; i++)
-    {
-        s += a[i];
-    }
-    return s;
-}
+int gdata3 = 11;
+int gdata7 = 12;
+int sum2(int a, int b) { return a - b; }
