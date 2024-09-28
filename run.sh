@@ -63,6 +63,7 @@ make install
 ExitIfCheckFail "install"
 
 # 运行
+cp ./compile_commands.json ../cmake
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib
 ./bin/main_run
 

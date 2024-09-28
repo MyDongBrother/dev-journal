@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/internal_utils.cmake)
 
-set(PROPERTY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/build.properties")
+set(PROPERTY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/cmake/build.properties")
 set(PROPERTY_FILE_LOCAL "${CMAKE_BINARY_DIR}/build.properties.local")
 
 # load properties into ${PROPERTIES}

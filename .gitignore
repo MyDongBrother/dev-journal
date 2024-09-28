@@ -2,3 +2,4 @@
 build_x86/
 build_arm/
 build/
+cmake/compile_commands.json
