@@ -46,18 +46,18 @@ int RunContex::Init()
 }
 int RunContex::Start()
 {
-    this->uss_run_ = true;
+    this->process_run_ = true;
     return 0;
 }
 int RunContex::Stop()
 {
-    this->uss_run_ = false;
+    this->process_run_ = false;
     return 0;
 }
 int RunContex::Deinit()
 {
-    this->uss_run_    = false;
-    this->thread_run_ = false;
+    this->process_run_ = false;
+    this->thread_run_  = false;
     return 0;
 }
 int RunContex::Loop()
@@ -76,7 +76,7 @@ void RunContex::taskMainProcessing()
 {
     while (thread_run_)
     {
-        if (uss_run_)
+        if (process_run_)
         {
             taskMain();
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
@@ -88,7 +88,7 @@ void RunContex::taskObserverProcessing()
 {
     while (thread_run_)
     {
-        if (uss_run_)
+        if (process_run_)
         {
             taskObserver();
             std::this_thread::sleep_for(std::chrono::milliseconds(20));

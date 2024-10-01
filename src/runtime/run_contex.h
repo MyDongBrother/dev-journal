@@ -57,7 +57,7 @@ class RunContex
 
   private:
     std::atomic<bool> thread_run_{};             // run flag
-    std::atomic<bool> uss_run_{};                // uss flag
+    std::atomic<bool> process_run_{};            // uss flag
     std::thread *thread_main_task_{nullptr};     //  main Task
     std::thread *thread_observer_task_{nullptr}; // observer Task
     GetTimeStamp_t time_stamp_;                  // time synchronization

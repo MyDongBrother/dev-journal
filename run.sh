@@ -13,6 +13,10 @@ case "$platform" in
         case "$architecture" in
             "x86")
                 setup_build_dir "./build_x86"
+                compiler_root_path="/usr"
+                echo "cmake_find_root_path ${compiler_root_path}" >> ${local_file}
+                echo "cmake_c_compiler ${compiler_root_path}/bin/gcc-9" >> ${local_file}
+                echo "cmake_cxx_compiler ${compiler_root_path}/bin/g++-9" >> ${local_file}
                 ;;
             "arm")
                 setup_build_dir "./build_arm"

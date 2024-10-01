@@ -21,6 +21,7 @@
  */
 
 #include "run_contex.h"
+#include <memory>
 #ifdef __TEST__
 #include "test/test_case.h"
 #endif
