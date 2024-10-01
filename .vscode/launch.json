@@ -1,0 +1,87 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        { //出现在vscode界面上的名字
+            "name": "(build) 启动",
+            // debugger类型 这是gdb
+            "type": "cppdbg",
+            "request": "launch",
+            //可执行文件位置
+            "program": "${workspaceFolder}/build_x86/bin/main_run",
+            "args": [],
+            //是否进入后暂停
+            "stopAtEntry": false,
+            //工作目录
+            "cwd": "${workspaceFolder}/build_x86/bin",
+            "environment": [
+                {
+                    "name": "LD_LIBRARY_PATH",
+                    "value": "${workspaceFolder}/build_x86/lib"
+                },
+                // {
+                //     "name": "LOG_TO_CONSOLE",
+                //     "value": "0"
+                // },
+                // {
+                //     "name": "LOG_LEVEL",
+                //     "value": "0"
+                // },
+                // {
+                //     "name": "LOG_TO_FILE",
+                //     "value": "0"
+                // },
+            ],
+            //是否使用外部终端
+            "externalConsole": false,
+            // dubug之前要运行的任务
+            //"preLaunchTask": "Build Fortran",
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "为 gdb 启用整齐打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "将反汇编风格设置为 Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ],
+            "miDebuggerPath": "/usr/bin/gdb",
+        },
+        { //出现在vscode界面上的名字
+            "name": "(remote) 启动",
+            // debugger类型 这是gdb
+            "type": "cppdbg",
+            "request": "launch",
+            //可执行文件位置
+            "program": "${workspaceFolder}/build_arm/main_run",
+            "args": [],
+            //是否连接后暂停
+            "stopAtConnect": true,
+            //工作目录
+            "cwd": "${workspaceFolder}/build_arm",
+            "environment": [],
+            //是否使用外部终端
+            "externalConsole": false,
+            // dubug之前要运行的任务
+            //"preLaunchTask": "Build Fortran",
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "为 gdb 启用整齐打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "将反汇编风格设置为 Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ],
+            "miDebuggerPath": "/opt/arm-gnu-toolchain-11.3.rel1-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-gdb",
+            "miDebuggerServerAddress": "192.168.42.88:2589"
+        },
+    ]
+}
