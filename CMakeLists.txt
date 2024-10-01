@@ -4,6 +4,22 @@ project(${project_name})
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+    message("Debug version")
+    add_definitions(-D__DEBUG__)
+    set(DEBUG TRUE)
+elseif(${CMAKE_BUILD_TYPE} STREQUAL "Test")
+    message("Test version")
+    add_definitions(-D__TEST__)
+    set(TEST TRUE)
+else()
+    message("Release version")
+    add_definitions(-D__RELEASE__)
+    set(RELEASE TRUE)
+endif()
+
+
+
 # C++ FLAGS DEBUG
 set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")
 # C++ FLAGS RELEASE -O3 no gdb

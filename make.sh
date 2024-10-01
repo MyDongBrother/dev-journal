@@ -1,11 +1,44 @@
 #!/bin/bash
 source ./script_tool/utils.sh
 
+# 判断脚本执行的任务
+if [ -z "$1" ]; then
+    operation="build"
+else
+    case "$1" in
+        "0")
+            operation="buile"
+            ;;
+        "1")
+            operation="run"
+            ;;
+        "2")
+            operation="pack"
+            ;;
+        "3")
+            operation="clear"
+            ;;
+        *)
+            echo -e "${RED}Invalid parameter: $1${NC}. Use [0:buile|1:run|2:pack|3:clear|other:invalid]"
+            exit 1
+            ;;
+    esac
+fi
+# 清理工程
+case "$operation" in
+    "clear")
+        rm -rf ./build*
+        exit 1
+    ;;
+    "pack")
+    ;;
+esac
+
 # 配置系统环境
 project_name="dev-journal"
 platform="linux" #[linux|qnx]
 architecture="x86" #[x86|arm]
-build_type="debug" #[release|debug|test]
+build_type="test" #[release|debug|test]
 
 # 根据配置选项创建build文件夹,配置编译选项
 case "$platform" in
@@ -65,10 +98,16 @@ make -j$cpu_num
 ExitIfCheckFail "make"
 make install
 ExitIfCheckFail "install"
-
-# 运行
 cp ./compile_commands.json ../cmake
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib
-./bin/main_run
+
+# 运行 | 打包
+case "$operation" in
+    "run")
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib
+        ./bin/main_run
+    ;;
+    "pack")
+    ;;
+esac
 
 echo "Done"

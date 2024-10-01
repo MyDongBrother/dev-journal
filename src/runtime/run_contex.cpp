@@ -71,7 +71,12 @@ int RunContex::Loop()
 
 void RunContex::setInputData() {}
 void RunContex::setOutputData() {}
-void RunContex::taskMain() { std::cout << "taskMain" << std::endl; }
+void RunContex::taskMain()
+{
+#ifndef __TEST__
+    std::cout << "taskMain" << std::endl;
+#endif
+}
 void RunContex::taskMainProcessing()
 {
     while (thread_run_)
@@ -83,7 +88,12 @@ void RunContex::taskMainProcessing()
         }
     }
 }
-void RunContex::taskObserver() { std::cout << "taskObserver" << std::endl; }
+void RunContex::taskObserver()
+{
+#ifndef __TEST__
+    std::cout << "taskObserver" << std::endl;
+#endif
+}
 void RunContex::taskObserverProcessing()
 {
     while (thread_run_)
