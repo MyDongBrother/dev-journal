@@ -4,12 +4,13 @@
 namespace uss_source
 {
 
-const int const_A = 3;
-int value_A       = 3;
-const int const_C = 3;
+const int const_global = 3;
 
 // #3.4 const不能修饰全局函数
-// int getConstC()const { return const_C; };
+// int getConstGlobal()const { return const_global; };
+
+const int const_A = 3;
+int value_A       = 3;
 
 // #6.0 const修饰函数返回值
 // #6.1 const修饰返回常数
@@ -18,17 +19,36 @@ const int getConstA() { return const_A; };
 // #6.1.2.3 返回一个非const修饰的也是一样
 // const int getConstA() { return value_A; };
 // #6.1.2.4 并没有一个int getValueC()作为重载,因为返回值是不作为函数签名的
-// int getValueC() { return value_c; };
+// int getValueA() { return value_A; };
 
+const int const_B = 3;
+int value_B       = 3;
 // #6.2 const修饰返回指针变量
-// const int *getConstA_p() { return &const_A; };
-// int const *getConstA_p() { return &const_A; };
-// int *getConstA_p() { return &const_A; };
-// int *const getConstA_pp()
-// {
-//     const int *const_A_p = &const_A;
-//     return const_A_p;
-// };
+// #6.2.1 const int * 表示指向常量的指针
+const int *getConst_Int_ptr_B() { return &const_B; };
+// #6.2.2 int const *等同const int *
+int const *getInt_Const_Ptr_B() { return &const_B; };
+// #6.3 int * const表示常量指针
+int *const getInt_Ptr_Const_B()
+{
+    int *const const_b_ptr = &value_B;
+    return const_b_ptr;
+};
+// #6.4 const int *const 表示指向常量的常量指针
+// #无论是该指针还是指向的值都不可以被修改
+const int *const getConst_Int_Ptr_Const_B()
+{
+    int *const const_b_ptr = &value_B;
+    return const_b_ptr;
+};
+
+const int const_C = 3;
+int value_C       = 3;
+
+// #6.5 const int& 表示常量引用
+const int &getConst_Int_Ref_C() { return value_C; };
+// #6.5.2  int& const 是语法错误的，因为引用一旦绑定到某个对象，就不能再改变
+// int &const getInt_Ref_Const_C() { return value_C; };
 
 TestCase::TestCase(std::shared_ptr<runcontex::RunContex> f_runcontex)
     : runcontex_(f_runcontex)
@@ -59,6 +79,24 @@ void TestCase::Run()
     // #6.1.2.2 该函数返回值 const 可有可无,没实际作用
     int run_Value_a = getConstA();
     run_Value_a     = 8;
+
+    const int *run_const_b = getInt_Const_Ptr_B();
+    int *run_Value_b       = &run_Value_a;
+    // #6.2.3 指向常量的指针的值不可以修改
+    // *run_Value_b           = 9;
+    // #6.2.4 指向常量的指针可以被修改
+    run_const_b = run_Value_b;
+
+    int *const run_const_ptr_b = getInt_Ptr_Const_B();
+    int *run_Value_ptr_b       = &run_Value_a;
+    // #6.3.1 常量指针的值是可以被修改的
+    *run_const_ptr_b = 9;
+    // #6.2.4 常量指针不可以被修改
+    // run_const_ptr_b = run_Value_ptr_b;
+
+    const int &run_Value_c = getConst_Int_Ref_C();
+    // 6.5.1 不能修改常量引用引用的值
+    // run_Value_c            = 100;
 }
 
 } // namespace uss_source
