@@ -8,7 +8,7 @@ endmacro(source_group_by_dir)
 file(GLOB_RECURSE module_header *.h)
 source_group_by_dir(module_header ${CMAKE_CURRENT_SOURCE_DIR})
 
-file(GLOB_RECURSE module_cxx "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+file(GLOB_RECURSE module_cxx "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/*.c")
 source_group_by_dir(module_cxx ${CMAKE_CURRENT_SOURCE_DIR})
 
 set(SOURCE_FILES ${module_header} ${module_cxx})
