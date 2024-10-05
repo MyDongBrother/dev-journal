@@ -1,5 +1,7 @@
 #include "test_case.h"
-#include "externc.h"
+#include "typedef_struct.h"
+
+void Student() { std::cout << "A function with repeated names \"Student\"" << std::endl; }
 
 namespace uss_source
 {
@@ -9,5 +11,10 @@ TestCase::TestCase(std::shared_ptr<runcontex::RunContex> f_runcontex)
 {
 }
 void TestCase::Init() {}
-void TestCase::Run() { my_c_function(12); }
+void TestCase::Run()
+{
+    StudentNoneTypedef me;
+    StudentTypedef you;
+    Student();
+}
 } // namespace uss_source
