@@ -20,15 +20,6 @@ endif()
 
 
 
-# C++ FLAGS DEBUG
-set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")
-# C++ FLAGS RELEASE -O3 no gdb
-set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
-
-# C FLAGS DEBUG
-set(CMAKE_C_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")
-# C FLAGS RELEASE no gdb
-set(CMAKE_C_FLAGS_RELEASE "$ENV{CXXFLAGS} -O0 -Wall")
 # C Flasg
 set(C_FLAGS -fPIC -Werror=return-type -Wno-unused-parameter -rdynamic)
 string(REPLACE ";" " " CMAKE_C_FLAGS "${C_FLAGS}")
@@ -36,23 +27,8 @@ string(REPLACE ";" " " CMAKE_C_FLAGS "${C_FLAGS}")
 set(CXX_FLAGS
     -std=c++14
     -fPIC
-    -DVALGRIND
-    -DCHECK_PTHREAD_RETURN_VALUE
-    -D_FILE_OFFSET_BITS=64
-    -Wall
-    -Wextra
-    -Werror=return-type
-    -Wno-unused-parameter
-    -Wold-style-cast
-    -Woverloaded-virtual
-    -Wpointer-arith
-    -Wwrite-strings
-    -MMD
-    -rdynamic
-    -Wno-error=deprecated-declarations
-    -Wno-deprecated-declarations
-    -Wno-sign-conversion
-    -Wno-sign-compare
+    -g
+    -O0
     # -fsanitize=address
 )
 string(REPLACE ";" " " CMAKE_CXX_FLAGS "${CXX_FLAGS}")

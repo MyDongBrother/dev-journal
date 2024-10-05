@@ -18,16 +18,27 @@ else
         "3")
             operation="clear"
             ;;
+        "4")
+            operation="nobuile_run"
+            ;;
         *)
             echo -e "${RED}Invalid parameter: $1${NC}. Use [0:buile|1:run|2:pack|3:clear|other:invalid]"
             exit 1
             ;;
     esac
 fi
-# 清理工程
+
 case "$operation" in
     "clear")
+        # 清理工程
         rm -rf ./build*
+        exit 1
+    ;;
+    "nobuile_run")
+        # 不编译，直接运行
+        cd ./build_x86
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib
+        ./bin/main_run
         exit 1
     ;;
     "pack")
