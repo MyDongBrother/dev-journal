@@ -1,7 +1,6 @@
 #pragma once
 #include "run_contex.h"
 #include <memory>
-#include "c_oop.h"
 
 namespace uss_source
 {
@@ -18,7 +17,5 @@ class TestCase
 
   private:
     std::shared_ptr<runcontex::RunContex> runcontex_;
-    Shape *shape;
-    Circle *circle;
 };
 } // namespace uss_source
