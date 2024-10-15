@@ -1,4 +1,5 @@
 #!/bin/bash
+
 source ./script_tool/utils.sh
 
 # 判断脚本执行的任务
@@ -6,23 +7,23 @@ if [ -z "$1" ]; then
     operation="build"
 else
     case "$1" in
-        "0")
-            operation="buile"
+        "build")
+            operation="build"
             ;;
-        "1")
+        "run")
             operation="run"
             ;;
-        "2")
+        "pack")
             operation="pack"
             ;;
-        "3")
+        "clear")
             operation="clear"
             ;;
-        "4")
-            operation="nobuile_run"
+        "launch")
+            operation="launch"
             ;;
         *)
-            echo -e "${RED}Invalid parameter: $1${NC}. Use [0:buile|1:run|2:pack|3:clear|other:invalid]"
+            echo -e "${RED}Invalid parameter: $1${NC}. Use [build|run|pack|clear|launch|other:invalid]"
             exit 1
             ;;
     esac
@@ -34,7 +35,7 @@ case "$operation" in
         rm -rf ./build*
         exit 1
     ;;
-    "nobuile_run")
+    "run")
         # 不编译，直接运行
         cd ./build_x86
         export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib
@@ -113,7 +114,7 @@ cp ./compile_commands.json ../cmake
 
 # 运行 | 打包
 case "$operation" in
-    "run")
+    "launch")
         export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib
         ./bin/main_run
     ;;

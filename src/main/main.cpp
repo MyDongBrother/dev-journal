@@ -23,7 +23,7 @@
 #include "run_contex.h"
 #include <memory>
 #ifdef __TEST__
-#include "test/test_case.h"
+#include "source_base.h"
 #endif
 /**
  * @brief 主函数，程序入口
@@ -37,24 +37,18 @@ int main(int argc, char *argv[])
 
     auto run_ctx = std::make_shared<runcontex::RunContex>();
 
-#ifdef __TEST__
-    auto test_ctx = std::make_shared<uss_source::TestCase>(run_ctx);
-    test_ctx->Init();
-#endif
     // #2 Init
     run_ctx->Init();
+#ifdef __TEST__
+    uss_source::SourceManager source_manager(run_ctx);
+    source_manager.Init();
+#endif
 
     // #3 Start
     run_ctx->Start();
 
 #ifdef __TEST__
-    auto test_func = [&] {
-        while (true)
-        {
-            test_ctx->Run();
-            std::this_thread::sleep_for(std::chrono::milliseconds(20));
-        }
-    };
+    auto test_func = [&] { source_manager.Run(); };
     std::thread(test_func).detach();
 #endif
 

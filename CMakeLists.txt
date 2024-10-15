@@ -5,32 +5,27 @@ project(${project_name})
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
-    message("Debug version")
-    add_definitions(-D__DEBUG__)
-    set(DEBUG TRUE)
+  message("Debug version")
+  add_definitions(-D__DEBUG__)
+  set(DEBUG TRUE)
 elseif(${CMAKE_BUILD_TYPE} STREQUAL "Test")
-    message("Test version")
-    add_definitions(-D__TEST__)
-    set(TEST TRUE)
+  message("Test version")
+  add_definitions(-D__TEST__)
+  set(TEST TRUE)
 else()
-    message("Release version")
-    add_definitions(-D__RELEASE__)
-    set(RELEASE TRUE)
+  message("Release version")
+  add_definitions(-D__RELEASE__)
+  set(RELEASE TRUE)
 endif()
-
-
 
 # C Flasg
 set(C_FLAGS -fPIC -Werror=return-type -Wno-unused-parameter -rdynamic)
 string(REPLACE ";" " " CMAKE_C_FLAGS "${C_FLAGS}")
 # C++ FLAGS
-set(CXX_FLAGS
-    -std=c++14
-    -fPIC
-    -g
-    -O0
-    # -fsanitize=address
+set(CXX_FLAGS -std=c++14 -fPIC -g -O0
+              # -fsanitize=address
 )
+
 string(REPLACE ";" " " CMAKE_CXX_FLAGS "${CXX_FLAGS}")
 set(THIRD_PARTY_LIB pthread ${LOG_LIB})
 

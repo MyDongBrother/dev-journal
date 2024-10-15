@@ -1,19 +1,20 @@
 #pragma once
 #include "run_contex.h"
+#include "source_base.h"
 #include <memory>
 
 namespace uss_source
 {
 
-class TestCase
+class TestCase : public SourceBase
 {
   public:
     // 构造函数
-    TestCase(std::shared_ptr<runcontex::RunContex> f_runcontex);
+    explicit TestCase(std::shared_ptr<runcontex::RunContex> f_runcontex);
     ~TestCase() = default;
 
-    void Init();
-    void Run();
+    int Init();
+    int Run();
 
   private:
     std::shared_ptr<runcontex::RunContex> runcontex_;
