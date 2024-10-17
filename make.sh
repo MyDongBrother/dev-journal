@@ -110,6 +110,7 @@ ExitIfCheckFail "make"
 make install
 ExitIfCheckFail "install"
 cp ./compile_commands.json ../cmake
+cp ../script_tool/init.sh ./
 
 # 运行 | 打包
 case "$operation" in
@@ -118,7 +119,13 @@ case "$operation" in
         ./bin/main_run
     ;;
     "pack")
+        cd ..
+        rm ./*.zip
+        output_dir="output"  # 目标文件夹
+        mkdir -p "$output_dir"  # 创建目标文件夹（如果不存在）
+        zip -r "${output_dir}/${project_name}_${platform}_${build_type}_$(date +'%Y%m%d').zip" "$build_dir"
     ;;
+
 esac
 
 echo "Done"

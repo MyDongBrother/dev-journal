@@ -7,6 +7,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 if(${PLATFORM_QNX})
   message("QNX platform")
   add_definitions(-D__QNX_OS__)
+  add_definitions(-D_QNX_SOURCE)
   set(QNX_OS TRUE)
 else()
   message("LINUX platform")
@@ -28,16 +29,26 @@ else()
   set(RELEASE TRUE)
 endif()
 
-# C Flasg
-set(C_FLAGS -fPIC -Werror=return-type -Wno-unused-parameter -rdynamic)
-string(REPLACE ";" " " CMAKE_C_FLAGS "${C_FLAGS}")
-# C++ FLAGS
-set(CXX_FLAGS -std=c++14 -fPIC -g -O0
-              # -fsanitize=address
-)
+if(${QNX_OS})
+  # C Flasg
+  set(C_FLAGS -fPIC -Werror=return-type -Wno-unused-parameter -rdynamic)
+  string(REPLACE ";" " " CMAKE_C_FLAGS "${C_FLAGS}")
+  # C++ FLAGS
+  set(CXX_FLAGS -std=c++14 -fPIC -lsocket -pthread
+                # -fsanitize=address
+  )
+  string(REPLACE ";" " " CMAKE_CXX_FLAGS "${CXX_FLAGS}")
 
-string(REPLACE ";" " " CMAKE_CXX_FLAGS "${CXX_FLAGS}")
-set(THIRD_PARTY_LIB pthread ${LOG_LIB})
+else()
+  # C Flasg
+  set(C_FLAGS -fPIC -Werror=return-type -Wno-unused-parameter -rdynamic)
+  string(REPLACE ";" " " CMAKE_C_FLAGS "${C_FLAGS}")
+  set(CXX_FLAGS -std=c++14 -fPIC -g -O0
+                # -fsanitize=address
+  )
+  string(REPLACE ";" " " CMAKE_CXX_FLAGS "${CXX_FLAGS}")
+  set(THIRD_PARTY_LIB pthread ${LOG_LIB})
+endif()
 
 # OutPut Dir
 set(OUTPUT_ROOT ${PROJECT_SOURCE_DIR}/output)

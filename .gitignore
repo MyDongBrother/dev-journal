@@ -4,3 +4,4 @@ build_arm/
 build/
 cmake/compile_commands.json
 build*
+output*
