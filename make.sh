@@ -121,7 +121,7 @@ case "$operation" in
     "pack")
         cd ..
         rm ./*.zip
-        output_dir="output"  # 目标文件夹
+        output_dir="/mnt/d/desktop/"  # 目标文件夹
         mkdir -p "$output_dir"  # 创建目标文件夹（如果不存在）
         zip -r "${output_dir}/${project_name}_${platform}_${build_type}_$(date +'%Y%m%d').zip" "$build_dir"
     ;;

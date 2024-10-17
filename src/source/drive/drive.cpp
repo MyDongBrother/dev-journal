@@ -4,7 +4,7 @@
 
 namespace uss_source
 {
-static UDPTestServer udp_test("192.168.1.200", 7500, 7501);
+static UDPTestClient udp_test("192.168.1.1", 7501, 7500);
 
 Drive::Drive(std::shared_ptr<runcontex::RunContex> f_runcontex) : SourceBase(f_runcontex)
 {

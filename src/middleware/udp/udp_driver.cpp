@@ -4,6 +4,7 @@
 #include <unistd.h>
 #ifdef __QNX_OS__
 #include <net/if.h>
+#include <cstdlib>
 #else
 #include <sys/prctl.h>
 #endif
@@ -65,14 +66,14 @@ int UDPDrive::Init(std::string f_target_ipaddr, uint32_t f_target_port,
     }
 #ifdef __QNX_OS__
     // #2.2 Set info
-    struct ifreq ifopt;
-    strncpy(ifopt.ifr_name, "vlan4", IFNAMSIZ); // vlan13
-    if (setsockopt(udp_sock_fd_, SOL_SOCKET, SO_BINDTODEVICE, (char *)&ifopt,
-                   sizeof(ifopt)) < 0)
-    {
-        perror("udp setsockopt");
-        exit(1);
-    }
+    // struct ifreq ifopt;
+    // strncpy(ifopt.ifr_name, "vlan4", IFNAMSIZ); // vlan13
+    // if (setsockopt(udp_sock_fd_, SOL_SOCKET, SO_BINDTODEVICE, (char *)&ifopt,
+    //                sizeof(ifopt)) < 0)
+    // {
+    //     perror("udp setsockopt");
+    //     exit(1);
+    // }
 #endif
     // #2.2 bind local addr
     if (bind(udp_sock_fd_, (struct sockaddr *)&local_addr, sizeof(local_addr)) < 0)
