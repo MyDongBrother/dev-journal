@@ -4,6 +4,16 @@ project(${project_name})
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+if(${PLATFORM_QNX})
+  message("QNX platform")
+  add_definitions(-D__QNX_OS__)
+  set(QNX_OS TRUE)
+else()
+  message("LINUX platform")
+  add_definitions(-D__LINUX_OS__)
+  set(LINUX_OS TRUE)
+endif()
+
 if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
   message("Debug version")
   add_definitions(-D__DEBUG__)
@@ -33,9 +43,11 @@ set(THIRD_PARTY_LIB pthread ${LOG_LIB})
 set(OUTPUT_ROOT ${PROJECT_SOURCE_DIR}/output)
 
 include_directories(${PROJECT_SOURCE_DIR}/src/main)
+include_directories(${PROJECT_SOURCE_DIR}/src/middleware)
 include_directories(${PROJECT_SOURCE_DIR}/src/runtime)
 include_directories(${PROJECT_SOURCE_DIR}/src/source)
 
 add_subdirectory(src/main)
+add_subdirectory(src/middleware)
 add_subdirectory(src/runtime)
 add_subdirectory(src/source)

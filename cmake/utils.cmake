@@ -72,6 +72,35 @@ macro(INIT_PLATFORM_INFO PROPERTIES)
       set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
       message("find root path: ${CMAKE_FIND_ROOT_PATH}")
     endif()
+  elseif(${platform} STREQUAL "qnx")
+    set(PLATFORM_QNX TRUE)
+    set(CMAKE_SYSTEM_NAME Qnx)
+    map_get(${PROPERTIES} cmake_c_compiler C_COMPILER)
+    map_get(${PROPERTIES} cmake_cxx_compiler CXX_COMPILER)
+    map_get(${PROPERTIES} cmake_find_root_path FIND_ROOT_PATH)
+
+    if(${C_COMPILER} STREQUAL "undefined")
+
+    else()
+      set(CMAKE_C_COMPILER ${C_COMPILER})
+    endif()
+
+    if(${CXX_COMPILER} STREQUAL "undefined")
+
+    else()
+      set(CMAKE_CXX_COMPILER ${CXX_COMPILER})
+    endif()
+
+    if(${FIND_ROOT_PATH} STREQUAL "undefined")
+
+    elseif(NOT ${CMAKE_MAJOR_VERSION} LESS 3)
+      set(CMAKE_FIND_ROOT_PATH ${FIND_ROOT_PATH})
+      set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+      set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+      set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+      message("find root path: ${CMAKE_FIND_ROOT_PATH}")
+    endif()
+
   else()
     message(
       FATAL_ERROR
