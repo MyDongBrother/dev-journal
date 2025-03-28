@@ -66,6 +66,10 @@
         "variant": "cpp",
         "main.h": "c",
         "main.hpp": "c",
-        "*.ipp": "cpp"
+        "*.ipp": "cpp",
+        "math.h": "c",
+        "mymath.h": "c",
+        "mymath_lib.h": "c",
+        "mymathio.h": "c"
     }
 }
